@@ -1,0 +1,152 @@
+/* Custom styles beyond Bootstrap */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero section improvements */
+.hero-section {
+  background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+  border-bottom: 5px solid #e67e22;
+}
+
+.hero-icon {
+  opacity: 0.8;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Card hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Enhanced hover effects */
+.hover-shadow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+/* Icon colors */
+.text-primary {
+  color: var(--yoruba-blue) !important;
+}
+
+.text-warning {
+  color: var(--yoruba-gold) !important;
+}
+
+/* Language toggle button */
+.language-toggle {
+  min-width: 60px;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-section {
+    text-align: center;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e67e22;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d35400;
+}
+
+/* Topics page specific styles */
+.max-width-800 {
+  max-width: 800px;
+}
+
+.category-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* Article content styling */
+.article-content h2 {
+  color: var(--yoruba-blue);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.article-content h3 {
+  color: var(--yoruba-gold);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+/* Print-friendly */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Topic Manager Styles */
+.topic-manager .hover-shadow {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.topic-manager .hover-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.topic-manager .icon-grid {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.topic-manager .icon-grid button {
+  transition: all 0.2s ease;
+}
+
+.topic-manager .icon-grid button:hover {
+  transform: scale(1.05);
+}
+
+.topic-manager .topic-icon {
+  transition: transform 0.3s ease;
+}
+
+.topic-manager .topic-icon:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,36 @@
+/* src/styles/custom.css */
+:root {
+  --yoruba-gold: #e67e22;
+  --yoruba-blue: #2c3e50;
+}
+
+/* Override Bootstrap colors */
+.bg-primary {
+  background-color: var(--yoruba-blue) !important;
+}
+
+.btn-primary {
+  background-color: var(--yoruba-blue) !important;
+  border-color: var(--yoruba-blue) !important;
+}
+
+.bg-secondary {
+  background-color: var(--yoruba-gold) !important;
+}
+
+.btn-secondary {
+  background-color: var(--yoruba-gold) !important;
+  border-color: var(--yoruba-gold) !important;
+}
+
+[lang="yo"] {
+  direction: ltr;
+}
+
+.text-yoruba {
+  color: var(--yoruba-gold) !important;
+}
+
+.bg-yoruba {
+  background-color: var(--yoruba-blue) !important;
+}
