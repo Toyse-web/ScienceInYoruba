@@ -94,7 +94,7 @@ const Articles = () => {
           <Col className="text-center"><h5>{language === "yo" ? "Kò sí àpilẹ̀kọ nínú ẹ̀ka yìí" : "No articles found in this category."}</h5></Col>
         ) : (
           articles.map(article => (
-            <Col lg={6} key={article-id} className="mb-4">
+            <Col lg={6} key={article._id} className="mb-4">
               <Card className="h-100 shadow-sm hover-shadow">
                 <Card.Body>
                       <Card.Title>{language === 'yo' ? article.title.yo : article.title.en}</Card.Title>
