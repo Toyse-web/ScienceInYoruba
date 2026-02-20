@@ -111,7 +111,7 @@ const Home = () => {
             {/* 2. Navigation Logic: Send user to Articles page with category filter */}
             <Button 
               as={Link} 
-              to={`/articles?category=${topic.name.en.toLowerCase()}`} 
+              to={`/articles?category=${topic.category}`} 
               variant="outline-primary" 
               size="sm"
             >
