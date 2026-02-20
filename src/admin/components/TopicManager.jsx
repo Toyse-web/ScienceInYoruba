@@ -132,18 +132,19 @@ const TopicManager = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
     
     if (name.includes(".")) {
       const [parent, child] = name.split(".");
       setFormData(prev => ({
         ...prev,
         [parent]: { ...prev[parent],
-          [child]: type === "checkbox" ? checked : value
+          [child]: val
         }
       }));
     } else {
       setFormData(prev => ({...prev,
-        [name]: type === "checkbox" ? checked : value
+        [name]: val
       }));
     }
   };
@@ -195,15 +196,33 @@ const TopicManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Ensure correct structure before sending
+    const topicData = {
+      name: {yo: formData.name.yo,
+        en: formData.name.en
+      },
+      description: {
+        yo: formData.description.yo,
+        en: formData.description.en
+      },
+      category: formData.category,
+      icon: formData.icon,
+      color: formData.color,
+      isFeatured: formData.isFeatured,
+      order: formData.order
+    };
+
+    console.log("Data being sent:", topicData);
     
     try {
       if (modalMode === "create") {
-        await api.post("/topics", formData);
+        await api.post("/topics", topicData); // Send the cleaned object
         setSuccess(language === "yo" 
           ? "Ọ̀ràn tuntun ti dá sílẹ̀!" 
           : "New topic created successfully!");
       } else {
-        await api.put(`/topics/${editingTopic._id}`, formData);
+        await api.put(`/topics/${editingTopic._id}`, topicData);
         setSuccess(language === "yo" ? "Ọ̀ràn ti ṣàtúnṣe!" : "Topic updated successfully!");
       }
       
@@ -356,6 +375,26 @@ const TopicManager = () => {
         </Modal.Header>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">
+                  {language === "yo" ? "Orúkọ (Yorùbá)" : "Name (Yorùbá)"} *
+                </Form.Label>
+                <Form.Control name="name.yo" value={formData.name.yo} onChange={handleInputChange}
+                  placeholder="Eg. Ìmọ́lẹ̀" required />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">
+                  {language === "yo" ? "Orúkọ (Gẹ̀ẹ́sì)" : "Name (English)"} *
+                </Form.Label>
+                <Form.Control name="name.en" value={formData.name.en} onChange={handleInputChange}
+                  placeholder="E.g. Light" required />
+              </Form.Group>
+            </Col>
+          </Row>
             <Row>
               <Col md={12}>
                 <Form.Group className="mb-3">
