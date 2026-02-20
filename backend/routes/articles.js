@@ -11,13 +11,26 @@ router.get("/", async (req, res) => {
       page = 1,
       limit = 10,
       category,
-      status,
+      status = "published",
       search,
       sort = "-createdAt"
     } = req.query;
 
     // Build query
     let query = {};
+    query.status = status;
+
+    const filters = [];
+
+    // Filter by category
+    if (category && category !== "all") {
+      filters.push({
+        $or: [
+          {category: { $regex: new RegExp(`^${category}$`, "i") }},
+          { topic: mongoose.Types.ObjectId.isValid(category) ? category : undefined }
+        ].filter(c => c.topic !== undefined || c.category !== undefined)
+      });
+    }
 
     if (status) {
       query.status = status;
@@ -25,22 +38,21 @@ router.get("/", async (req, res) => {
       query.status = "published";
     }
 
-    // Filter by category
-    if (category && category !== "all") {
-      query.$or = [ 
-        { category: {$regex: new RegExp(`^${category}$`, "i") }},
-        {topic: mongoose.Types.ObjectId.isValid(category) ? category : undefined}
-      ].filter(condition => Object.values(condition)[0] !== undefined);
-    }
-
     // Search functionality
     if (search) {
-      query.$or = [
+      filters.push({
+        $or: [
         { "title.en": { $regex: search, $options: "i" } },
         { "title.yo": { $regex: search, $options: "i" } },
         { "content.en": { $regex: search, $options: "i" } },
         { "content.yo": { $regex: search, $options: "i" } }
-      ];
+      ]
+      });
+    }
+
+    // if we have filters, join them with $and
+    if (filters.length > 0) {
+      query.$and = filters;
     }
 
     // Execute query with pagination
